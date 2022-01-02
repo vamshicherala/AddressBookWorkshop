@@ -4,7 +4,6 @@ import java.util.List;
 
 
 import com.bridgelabz.addressbook.dto.PersonDTO;
-import com.bridgelabz.addressbook.exceptions.AddressBookException;
 import com.bridgelabz.addressbook.model.PersonData;
 import com.bridgelabz.addressbook.repository.AddressBookRepository;
 
@@ -19,7 +18,7 @@ public class AddressBookServices implements IAddressBookServices{
 
     /**
      * this method is to get all person data
-     * param : personDTO
+     * param :personDTO
      * @return personData
      */
     @Override
@@ -35,7 +34,7 @@ public class AddressBookServices implements IAddressBookServices{
 
     @Override
     public PersonData getPersonDataById(int id) {
-        return addressBookRepository.findById(id).orElseThrow(()-> new AddressBookException("Person not found"));
+        return addressBookRepository.findById(id).orElseThrow(()-> new RuntimeException());
     }
 
     /**
@@ -67,7 +66,7 @@ public class AddressBookServices implements IAddressBookServices{
     @Override
     public void deletePersonData(int id) {
         PersonData personData = this.getPersonDataById(id);
-        addressBookRepository.delete(personData); 
+        addressBookRepository.delete(personData);
     }
-    
+
 }

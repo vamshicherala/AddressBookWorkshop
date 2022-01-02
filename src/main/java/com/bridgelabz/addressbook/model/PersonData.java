@@ -25,26 +25,26 @@ public @Data class PersonData {
     //Attributes or properties for the Person
     @Id
     private int id;
-    @Column
+    @Column(name = "FirstName")
     private String firstName;
-    @Column
+    @Column(name = "LastName")
     private String lastName;
-    @Column
+    @Column(name = "Gender")
     private String gender;
-    @Column
+    @Column(name = "PhoneNumber")
     private long phoneNumber;
-    @Column
+    @Column(name = "Email")
     private String email;
-    @Column
+    @Column(name = "Address")
     private String address;
-    @Column
+    @Column(name = "City")
     private String city;
-    @Column
+    @Column(name = "Country")
     private String country;
 
     /**
      * This method is to Assign the data
-     * param personDTO
+     * @param personDTO
      */
 
     public PersonData(PersonDTO personDTO){
@@ -69,5 +69,5 @@ public @Data class PersonData {
         this.city = personDTO.getCity();
         this.country = personDTO.getCountry();
     }
-    
+
 }
