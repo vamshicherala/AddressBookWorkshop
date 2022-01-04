@@ -5,7 +5,7 @@ import java.util.List;
 import com.bridgelabz.addressbook.dto.PersonDTO;
 import com.bridgelabz.addressbook.dto.ResponseDTO;
 import com.bridgelabz.addressbook.model.PersonData;
-import com.bridgelabz.addressbook.service.IAddressBookServices;
+import com.bridgelabz.addressbook.service.IPersonServices;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,18 +25,18 @@ import org.springframework.web.bind.annotation.RestController;
  * which accepts all the client request with given URLs
  */
 @RestController
-@RequestMapping("/addressbook")
-public class AddressBookController {
+@RequestMapping("/addressbook/person")
+public class PersonController {
 
     @Autowired
-    private IAddressBookServices addressBookServices;
+    private IPersonServices personServices;
     /**
      * This method is get all data
      * @return ResponseEntity : with person data list and Status code
      */
     @GetMapping("/get")
     public ResponseEntity<ResponseDTO> getAddressBook(){
-		List<PersonData> personList = addressBookServices.getPersonData();
+		List<PersonData> personList = personServices.getPersonData();
 		ResponseDTO responseDTO = new ResponseDTO("Get call Successful", personList);
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
 	}
@@ -48,7 +48,7 @@ public class AddressBookController {
      */
     @GetMapping("/get/{id}")
     public ResponseEntity<ResponseDTO> getAddressBookById(@PathVariable("id") int id){
-		PersonData personData = addressBookServices.getPersonDataById(id);
+		PersonData personData = personServices.getPersonDataById(id);
 		ResponseDTO responseDTO = new ResponseDTO("Get data By Id is Successfull", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
 	}
@@ -60,7 +60,7 @@ public class AddressBookController {
      */
     @PostMapping("/post")
 	public ResponseEntity<ResponseDTO> addingPerson(@RequestBody PersonDTO personDTO){
-		PersonData personData = addressBookServices.addPersonData(personDTO);
+		PersonData personData = personServices.addPersonData(personDTO);
 		ResponseDTO responseDTO = new ResponseDTO("post data is Successful", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
 	}
@@ -74,7 +74,7 @@ public class AddressBookController {
     @PutMapping("/put/{id}")
 	public ResponseEntity<ResponseDTO> updatingPerson(@PathVariable("id") int id,@RequestBody PersonDTO personDTO){
 		
-		PersonData personData = addressBookServices.updatePersonData(id,personDTO);
+		PersonData personData = personServices.updatePersonData(id,personDTO);
 		ResponseDTO responseDTO = new ResponseDTO("update data is Successful", personData);
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
 	}
@@ -85,7 +85,7 @@ public class AddressBookController {
      */
     @DeleteMapping("/delete/{id}")
 	public ResponseEntity<ResponseDTO> deletePersonById(@PathVariable ("id") int id){
-		addressBookServices.deletePersonData(id);
+		personServices.deletePersonData(id);
 		ResponseDTO responseDTO = new ResponseDTO("delete data is Successful of id :", id);
 		return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
 	}

@@ -5,7 +5,7 @@ import com.bridgelabz.addressbook.dto.PersonDTO;
 import com.bridgelabz.addressbook.model.PersonData;
 
 
-public interface IAddressBookServices {
+public interface IPersonServices {
 
     List<PersonData> getPersonData();
 

@@ -5,16 +5,16 @@ import java.util.List;
 
 import com.bridgelabz.addressbook.dto.PersonDTO;
 import com.bridgelabz.addressbook.model.PersonData;
-import com.bridgelabz.addressbook.repository.AddressBookRepository;
+import com.bridgelabz.addressbook.repository.IPersonRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AddressBookServices implements IAddressBookServices{
+public class PersonServices implements IPersonServices {
 
     @Autowired
-    private AddressBookRepository addressBookRepository;
+    private IPersonRepository IPersonRepository;
 
     /**
      * this method is to get all person data
@@ -23,7 +23,7 @@ public class AddressBookServices implements IAddressBookServices{
      */
     @Override
     public List<PersonData> getPersonData() {
-        return addressBookRepository.findAll();
+        return IPersonRepository.findAll();
     }
     /**
      * this method is to get the  person data by Id
@@ -34,7 +34,7 @@ public class AddressBookServices implements IAddressBookServices{
 
     @Override
     public PersonData getPersonDataById(int id) {
-        return addressBookRepository.findById(id).orElseThrow(()-> new RuntimeException());
+        return IPersonRepository.findById(id).orElseThrow(()-> new RuntimeException());
     }
 
     /**
@@ -45,7 +45,7 @@ public class AddressBookServices implements IAddressBookServices{
     @Override
     public PersonData addPersonData(PersonDTO personDTO) {
         PersonData personData = new PersonData(personDTO);
-        return addressBookRepository.save(personData);
+        return IPersonRepository.save(personData);
     }
     /**
      * This method is to update the person data
@@ -57,7 +57,7 @@ public class AddressBookServices implements IAddressBookServices{
     public PersonData updatePersonData(int id, PersonDTO personDTO) {
         PersonData personData = this.getPersonDataById(id);
         personData.updatePersonData(personDTO);
-        return addressBookRepository.save(personData);
+        return IPersonRepository.save(personData);
     }
     /**
      * this method is to delete the personData by using the id
@@ -66,7 +66,7 @@ public class AddressBookServices implements IAddressBookServices{
     @Override
     public void deletePersonData(int id) {
         PersonData personData = this.getPersonDataById(id);
-        addressBookRepository.delete(personData);
+        IPersonRepository.delete(personData);
     }
 
 }

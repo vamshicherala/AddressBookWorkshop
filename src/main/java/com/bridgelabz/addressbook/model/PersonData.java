@@ -1,15 +1,14 @@
 package com.bridgelabz.addressbook.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.bridgelabz.addressbook.dto.PersonDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 
 /**
@@ -20,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "addressbook_data")
 @AllArgsConstructor
 @NoArgsConstructor
-public @Data class PersonData {
+public @Data class PersonData implements Serializable {
 
     //Attributes or properties for the Person
     @Id
@@ -42,9 +41,13 @@ public @Data class PersonData {
     @Column(name = "Country")
     private String country;
 
+    @ManyToOne
+    @JoinColumn(name = "aId")
+    private AddressBookData addressBookData;
+
     /**
      * This method is to Assign the data
-     * @param personDTO
+     * param :personDTO
      */
 
     public PersonData(PersonDTO personDTO){
